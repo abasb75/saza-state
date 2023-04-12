@@ -1,0 +1,19 @@
+body{
+  background: #f1f1f1;
+}
+
+h1{
+  line-height: 90vh;
+  font-size: 120px;
+  text-align: center;
+  user-select: none;
+}
+
+.footer{
+  text-align: center;
+}
+
+.footer a{
+  color: #333;
+  text-decoration: none;
+}
