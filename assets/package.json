@@ -1,5 +1,5 @@
 {
-  "name": "saza-states",
+  "name": "saza-state",
   "version": "0.0.1",
   "description": "a great react state manager",
   "main": "index.js",
