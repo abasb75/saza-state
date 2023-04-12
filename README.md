@@ -9,12 +9,12 @@
 
 ## Installation
 
-install <code>saza-state<code> with npm :
+<p>install <code>saza-state<code> with npm :</p>
 ```sh
 npm i saza-state
 ```
 
-##how to use?
+## how to use?
 
 for get states from ```saza-state``` :
 
