@@ -1,9 +1,14 @@
 import './App.css';
-import { useSazaDispatch, addSazaAction , addSazaStorageItems} from '../src';
+
+import { 
+  sazaDispatch as dispatch 
+  , addSazaAction 
+  , addSazaStorageItems
+} from '../src';
+
 import ComponentA from './ComponentA';
 import ComponentB from './ComponentB';
 import ComponentC from './ComponentC';
-import useSazaAsyncDispatch from '../src/useSazaAsyncDispatch';
 
 addSazaAction('counter_up', (state) =>{
   const counter = state.counter+1 || 1;
@@ -19,8 +24,6 @@ addSazaStorageItems(['counter']);
 
 
 function App() {
-  
-  const dispatch = useSazaDispatch();
  
 
   return (<>

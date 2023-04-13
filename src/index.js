@@ -1,13 +1,27 @@
 import useSazaState from "./useSazaState";
-import useSazaDispatch from "./useSazaDispatch";
-import useSazaAsyncDispatch from "./useSazaAsyncDispatch";
-import store from "./store";
+import sazaStateWatcher from "./sazaStateWatcher";
+
+import sazaDispatch from "./sazaDispatch";
+import sazaAsyncDispatch from "./sazaAsyncDispatch";
+import store from "./Store";
+
 const addSazaAction = store.addAction.bind(store);
 const addSazaStorageItems = store.addStorageItems.bind(store);
+
 export {
+
+    /* getters */
     useSazaState,
-    useSazaDispatch,
-    useSazaAsyncDispatch,
+    sazaStateWatcher,
+
+    /* setters */
+    sazaDispatch,
+    sazaAsyncDispatch,
+
+    /* action & reducer */
     addSazaAction,
-    addSazaStorageItems
+
+    /* localstorage */
+    addSazaStorageItems,
+
 };

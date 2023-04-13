@@ -1,24 +1,40 @@
-const { useSazaState, useSazaDispatch } = require("../src");
+import { 
+    sazaDispatch as dispatch,
+    sazaStateWatcher 
+} from "../src";
+
+
 import React from "react";
 
 class ComponentC extends React.Component{
+
+
+    state = {
+        counter:0,
+    }
+
     componentDidMount(){
-        console.log('component c is rendered')
+        sazaStateWatcher(
+            (counter)=>{
+                this.setState({
+                    counter:counter,
+                });
+            },
+            state=>state.counter,
+        );
     }
+    
     componentDidUpdate(){
-        console.log('component c is rendered')
+        console.log('component c is rendered ...');
     }
+    
     render(){
         return <p
-        onClick={()=>this.props.dispatch('counter_up')}
+        onClick={()=>dispatch('counter_up')}
         style={{width:'33%',height:'120px',textAlign:'center',lineHeight:'120px',fontSize:'120px'}}
-        >{this.props.counter}</p>
+        >{this.state.counter}</p>
     }
 
 }
 
-export default function(){
-    const counter = useSazaState(state=>state.counter);
-    const dispatch = useSazaDispatch();
-    return <ComponentC counter={counter} dispatch={dispatch}  />
-};
+export default ComponentC;

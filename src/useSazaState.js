@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import store from "./store";
+import store from "./Store";
 
 function useSazaState(selector){
+    
     if(typeof selector !== 'function'){
         return false;
     }

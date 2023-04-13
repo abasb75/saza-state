@@ -20,8 +20,6 @@ class Store {
             })
         }
 
-        
-
     }
 
     getState = ()=>{
@@ -72,12 +70,20 @@ class Store {
     /* subscribes */
 
     subscribe(setState,selector){
+        
         if(typeof setState !== 'function' || typeof selector !== 'function'){
             return false;
         }
-        const random = Math.random() * 9999999;
+
+        const random = Math.ceil(Math.random() * 100000000);
         const subsId = Date.now().toString() + random;
-        this.subscribes.push({subsId , selector , setState , value:null });
+        
+        this.subscribes.push({
+            subsId , 
+            selector , 
+            setState , 
+            value:selector(this.getState())||null 
+        });
         return subsId;
     }
 
@@ -86,7 +92,6 @@ class Store {
             return false;
         }
         this.subscribes = this.subscribes.filter(sub=>subsId !== sub.subsId);
-        console.log(this.subscribes)
     }
 
     /* action controller */
