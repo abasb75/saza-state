@@ -201,7 +201,7 @@ export default App;
 
 ### Async Dispatch
 
-You can use asynchronous actions. This hook receives a function and creates an asynchronous action for use!
+You can use asynchronous actions. ```useSazaAsyncDispatch``` hook receives a function and creates an asynchronous action for use!
 
 ```javascript
 import { useSazaState , useSazaAsyncDispatch } from "saza-states";
