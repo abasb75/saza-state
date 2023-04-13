@@ -1,5 +1,5 @@
-<p><code>SAZA-STATE</code> is a great state manage for react apps!</p>
-<p>It doesnt need Provider Like context</code> or <code>react-redux</code></p>
+<p><code>SAZA-STATE</code> is a great state manager for react apps!</p>
+<p>It does not need <code>Provider</code> Like context</code> or <code>react-redux</code></p>
 <p>It save state on browser storage like <code>redux-persist</code> </p>
 <p>It does not require external tools to apply changes in different tabs of the browser</p>
 <p>It has optimized rendering.</p>
