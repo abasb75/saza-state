@@ -16,5 +16,13 @@
     "context"
   ],
   "author": "Abbas Bagheri <abasbagheria@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abasb75/saza-state.git"
+  },
+    "bugs": {
+    "url": "https://github.com/abasb75/saza-state/issues"
+  },
+  "homepage": "https://github.com/abasb75/saza-state#readme"
 }

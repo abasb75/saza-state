@@ -188,7 +188,7 @@ sazaStateWatcher(watcher:Function,selector?:Function);
 import { 
     sazaDispatch as dispatch,
     sazaStateWatcher 
-} from "../src";
+} from "saza-state";
 
 
 import React from "react";
@@ -225,7 +225,7 @@ for get more optimized rendering on watcher pass a selector :
 import { 
     sazaDispatch as dispatch,
     sazaStateWatcher 
-} from "../src";
+} from "saza-state";
 
 
 import React from "react";
