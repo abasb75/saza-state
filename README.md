@@ -1,6 +1,6 @@
 <p><code>SAZA-STATE</code> is a great state manage for react apps!</p>
-<p>It's doesnt need Provider Like context</code> or <code>react-redux</code></p>
-<p>It's save state on browser storage like <p>redux-persist</p> </p>
+<p>It doesnt need Provider Like context</code> or <code>react-redux</code></p>
+<p>It save state on browser storage like <code>redux-persist</code> </p>
 <p>It does not require external tools to apply changes in different tabs of the browser</p>
 <p>It has optimized rendering.</p>
 <p>
@@ -9,7 +9,8 @@
 
 ## Installation
 
-<p>install <code>saza-state<code> with npm :</p>
+<p>install <code>saza-state</code> with npm :</p>
+
 ```sh
 npm i saza-state
 ```
@@ -65,7 +66,6 @@ addSazaAction(
     }
 );
 
-// set counter to 1 by clicking on this button
 function Button(){
     return <button onClick={()=>dispatch('counter_up')}>Counter Up</button>
 }
@@ -79,7 +79,7 @@ also you can pass ```payload``` to ```reducer``` :
 ```javascript
 import { useSazaDispatch , addSazaAction } from 'saza-state';
 
-// add counter up action 
+// add counter down action 
 addSazaAction(
     'counter_down', // type : must be unique 
     (state,payload) =>{ // reducer for 'counter_down' action
@@ -91,7 +91,6 @@ addSazaAction(
     }
 );
 
-// set counter to 1 by clicking on this button
 function Button(){
     return <button onClick={()=>dispatch('counter_down',{count:1})}>Counter Down</button>
 }
