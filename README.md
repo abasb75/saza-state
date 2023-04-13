@@ -238,7 +238,7 @@ class ComponentC extends React.Component{
 
     componentDidMount(){
         sazaStateWatcher(
-            ({counter})=>{
+            (counter)=>{ // just recived selected items on selector
                 this.setState({
                     counter:counter,
                 });
