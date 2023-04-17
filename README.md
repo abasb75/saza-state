@@ -289,8 +289,7 @@ function ComponentA(){
         startCounter();
     },[]);
 
-    return (<p 
-    style={{width:'33%',height:'120px',textAlign:'center',lineHeight:'120px',fontSize:'120px'}}>
+    return (<p >
         {counter}
     </p>);
 }
