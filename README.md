@@ -370,7 +370,7 @@ function DataFetcher(){
 
 ```
 
-third argument for ```useSazaFetcher``` is ```fetch``` api option. for example if you need get data from a post request:
+third argument for ```useSazaFetcher``` is ```fetch``` api options. for example if you need get data from a post request:
 
 ```javascript
 function MyComponent(){
