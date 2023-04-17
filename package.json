@@ -4,6 +4,7 @@
   "description": "a great state manager for react",
   "scripts": {
     "start": "webpack serve --port 3000",
+    "build": "set NODE_ENV=production && webpack",
     "clean": "rm -rf dist",
     "release": "mkdirp ./dist && copy assets\\package.json dist\\ && copy src\\ dist\\ && copy README.md dist\\"
   },
