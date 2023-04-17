@@ -53,7 +53,7 @@ import { sazaDispatch as dispatch } from 'saza-state';
 
 // set counter to 1 by clicking on this button
 function Button(){
-    return <button onClick={()=>dispatch({counter:0})}>Setup Counter</button>
+    return <button onClick={()=>dispatch({counter:1})}>Setup Counter</button>
 }
 
 export default Button;
@@ -102,7 +102,7 @@ import { sazaDispatch as dispatch , addSazaAction } from 'saza-state';
 addSazaAction(
     'counter_down', // type : must be unique 
     (state,payload) =>{ // reducer for 'counter_down' action
-    const counter = state.counter-payload.count || 1;
+        const counter = state.counter-payload.count || 1;
         return {
             ...state,
             counter
@@ -336,7 +336,7 @@ export default App;
 
 ## useSazaFetcher
 
-```useSazaFetcher``` is one-line data fetcher!
+```useSazaFetcher``` is a one-line data fetcher!
 
 ```javascript
 useSazaFetcher(url:string,key:string,options?:object) : { key:object ,reload:Function} ;
