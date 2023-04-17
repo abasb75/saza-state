@@ -1,47 +1,42 @@
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { 
-  sazaDispatch as dispatch 
-  , addSazaAction 
-  , addSazaStorageItems
-} from '../src';
-
-import ComponentA from './ComponentA';
-import ComponentB from './ComponentB';
-import ComponentC from './ComponentC';
-
-addSazaAction('counter_up', (state) =>{
-  const counter = state.counter+1 || 1;
-  return {
-    ...state,
-    counter
-  }
-});
-
-addSazaStorageItems(['counter']);
-
-
-
+import SideBar from './components/sidebar';
+import Installation from './routes/installation';
+import Usage from './routes/usage';
+import UseSazaState from './routes/useSazaState';
+import Dispatch from './routes/dispatch';
+import AddSazaAction from './routes/addSazaAction';
+import ClassComponent from './routes/classComponents';
+import AddSazaStateWatcher from './routes/addSazaStateWatcher';
+import AddSazaStateWatcherOptimized from './routes/optimizationAddSazaStateWatcher';
+import SazaAsyncDispatch from './routes/sazaAsyncDispatch';
+import LocalStorage from './routes/localstorage';
+import SazaFetchData from './routes/sazaFetchData';
 
 function App() {
- 
 
-  return (<>
-    <div style={{display:'flex',maxWidth:'900px',margin:'25px auto',width:'100%'}}>
-      <ComponentA />
-      <ComponentB />
-      <ComponentC />
+  return (<BrowserRouter>
+    <SideBar />
+    <div className='main'>
+        <Routes>
+            <Route index path='/' element={<Installation />} />
+            <Route index path='/installation' element={<Installation />} />
+            <Route exact path='/usage' element={<Usage />} />
+            <Route exact path='/use-saza-state' element={<UseSazaState />} />
+            <Route exact path='/saza-dispatch' element={<Dispatch />} />
+            <Route exact path='/add-saza-action' element={<AddSazaAction />} />
+            <Route exact path='/class-component' element={<ClassComponent />} />
+            <Route exact path='/add-saza-state-whatcher' element={<AddSazaStateWatcher />} />
+            <Route exact path='/add-saza-state-whatcher-optimization' element={<AddSazaStateWatcherOptimized  />} />
+            <Route exact path='/saza-async-dispatch' element={<SazaAsyncDispatch  />} />
+            <Route exact path='/localStorage' element={<LocalStorage  />} />
+            <Route exact path='/saza-fetch-data' element={<SazaFetchData  />} />
+        </Routes>
     </div>
-    <div style={{textAlign:'center', margin:'100px 0 250px 0'}}>
-      <button 
-      onClick={()=>dispatch('counter_up')}
-      style={{padding:'20px 25px',background:'white'}}
-      >COUNTER UP</button>
-    </div>
-    <div className='footer'>
-      <p><a href='https://abasbagheri.ir'>&copy; Abbas Bagheri</a></p>
-    </div>
-  </>);
+  </BrowserRouter>);
+
+
 }
 
 export default App;

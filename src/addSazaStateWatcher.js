@@ -1,6 +1,6 @@
 import store from "./Store";
 
-function sazaStateWatcher(wathcher,selector=(state=>state)){
+function addSazaStateWatcher(wathcher,selector=(state=>state)){
 
     if(typeof wathcher === 'function'){
         wathcher(selector(store.getState()));
@@ -9,9 +9,8 @@ function sazaStateWatcher(wathcher,selector=(state=>state)){
         }else{
             return false;
         }
-        
     }
 
 }
 
-export default sazaStateWatcher;
+export default addSazaStateWatcher;

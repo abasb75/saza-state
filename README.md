@@ -179,15 +179,17 @@ export default ComponentC;
 
 ## State Watcher
 
+<p>You can add a state watcher! state watcher will executed for any state changes</p>
+
 ```javascript
-sazaStateWatcher(watcher:Function,selector?:Function);
+addSazaStateWatcher(watcher:Function,selector?:Function);
 ```
 
 
 ```javascript
 import { 
     sazaDispatch as dispatch,
-    sazaStateWatcher 
+    addSazaStateWatcher 
 } from "saza-state";
 
 
@@ -200,13 +202,13 @@ class ComponentC extends React.Component{
     }
 
     componentDidMount(){
-        sazaStateWatcher(
-            (state)=>{
+        addSazaStateWatcher(
+            (state)=>{ 
                 this.setState({
                     counter:state.counter,
                 });
             },
-        );
+        ); // -> rerender for any change on state
     }
     
     render(){
@@ -224,7 +226,7 @@ for get more optimized rendering on watcher pass a selector :
 ```javascript
 import { 
     sazaDispatch as dispatch,
-    sazaStateWatcher 
+    addSazaStateWatcher 
 } from "saza-state";
 
 
@@ -237,13 +239,14 @@ class ComponentC extends React.Component{
     }
 
     componentDidMount(){
-        sazaStateWatcher(
+
+        addSazaStateWatcher(
             (counter)=>{ // -> just recived selected items on selector
                 this.setState({
                     counter:counter,
                 });
             },
-            state=>state.counter // -> rerender when state.counter changed
+            state=>state.counter // -> only rerender for state.counter changes
         );
     }
     
@@ -268,24 +271,31 @@ sazaAsyncDispatch(dispatcher:Function);
 You can use asynchronous actions. ```sazaAsyncDispatch``` receives a function and creates an asynchronous action for use!
 
 ```javascript
-import { useSazaState , sazaAsyncDispatch as asyncDispatch } from "saza-states";
+import { useSazaState , sazaAsyncDispatch as asyncDispatch  } from "saza-state";
+import { useEffect } from "react";
 
 function ComponentA(){
-
     const counter = useSazaState(state=>state.counter) || 0;
-    
+
+    const startCounter = ()=>{
+        asyncDispatch(dispatch=>{
+            setInterval(()=>{
+            dispatch('counter_up');
+            },1000);
+        });
+    }
+
+    useEffect(()=>{
+        startCounter();
+    },[]);
+
     return (<p 
-    onClick={()=>asyncDispatch(dispatch=>{
-        setInterval(()=>{
-          dispatch('counter_up');
-        },1000);
-    })}>
+    style={{width:'33%',height:'120px',textAlign:'center',lineHeight:'120px',fontSize:'120px'}}>
         {counter}
     </p>);
 }
 
 export default ComponentA;
-
 
 ```
 
@@ -296,7 +306,7 @@ export default ComponentA;
 
 
 ```javascript
-addSazaStorageItems(item:String[]);
+setupSazaStorageItems(items:String[]);
 ```
 
 You can specify any of the properties of the state object to store in local storage. 
@@ -305,11 +315,11 @@ In this case, you will get the past information of the browser. Also, the inform
 <img src="assets/multi-tab-screen.gif" alt="saza-state" />
 
 ```javascript
-import { addSazaStorageItems} from 'saza-state';
+import { setupSazaStorageItems } from 'saza-state';
 
 
-addSazaStorageItems([
-    'counter', // state.counter will save on localstorage
+setupSazaStorageItems([
+    'counter', // state.counter will save on localstorage,
 ]);
 
 
@@ -323,3 +333,52 @@ export default App;
 ```
 
 
+
+## useSazaFetcher
+
+```useSazaFetcher``` is one-line data fetcher!
+
+```javascript
+useSazaFetcher(url:string,key:string,options?:object) : { key:object ,reload:Function} ;
+
+```
+for example if we need to get todo list from api
+
+```javascript
+import {useSazaFetcher} from "saza-state";
+
+function DataFetcher(){
+
+    const {fetcherTodos,reload} = useSazaFetcher('/todos.json','fetcherTodos');
+
+    // fetcherTodos is an object with isLoading,error and data , fetcherTodos equals with passed key to useSazaFetcher
+    // reload is a method to reload data from api
+    console.log(fetcherTodos);
+
+    const todos = ()=>{
+        if(fetcherTodos.isLoading) return <div>is loading ...</div>;
+        else if(fetcherTodos.error) return <div>error when loading!</div>;
+        else if(fetcherTodos.data.length === 0) return <div>There are nothing to display!</div>;
+        else return <div>{fetcherTodos.data.map((todo,index)=><article key={index}>{todo.title}</article>)}</div>;
+    }
+
+    return (<>
+        <button onClick={reload}>reload</button>
+        {todos()}
+    </>);
+
+}
+
+```
+
+third argument for ```useSazaFetcher``` is ```fetch``` api option. for example if you need get data from a post request:
+
+```javascript
+function MyComponent(){
+
+    const {requestData,reload} = useSazaFetcher('/todos.json','requestData' , {method:'POST',});
+
+    ...
+
+}
+```

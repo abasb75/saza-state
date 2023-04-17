@@ -23,6 +23,7 @@
     "@types/react": "^18.0.34",
     "@types/react-dom": "^18.0.11",
     "babel-loader": "^9.1.2",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "eslint": "^8.38.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -31,6 +32,8 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.5",
     "mkdirp": "^3.0.0",
+    "postcss-loader": "^7.2.4",
+    "style-loader": "^3.3.2",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.4",
     "webpack": "^5.78.0",
@@ -39,6 +42,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "6.8",
+    "react-syntax-highlighter": "^15.5.0"
   }
 }

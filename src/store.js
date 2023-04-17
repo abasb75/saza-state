@@ -27,27 +27,35 @@ class Store {
     }
 
     setState = (data,payload=null)=>{
+
         if(typeof data === 'string'){
             this.setStateFromAction(data,payload);
             return;
         }else if(typeof data !== 'object'){
             return false;
         }
+        
         this.state = {
             ...this.state,
             ...data
         }
+       
         this.saveOnStorage();
+
         this.subscribes.forEach((m,i)=>{
-            const newValue = m.selector(this.state);
-            const oldValue =  m.value;
-            if(!newValue){
-                return;
+            try{
+                const newValue = m.selector(this.state);
+                const oldValue =  m.value;
+                
+                if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
+                    m.setState(newValue);
+                    m.value = newValue;
+                }
+
+            }catch(err){
+                return false;
             }
-            if(JSON.stringify(newValue) !== JSON.stringify(oldValue)){
-                m.setState(newValue);
-                m.value = newValue;
-            }
+            
         });
 
     }
@@ -107,7 +115,7 @@ class Store {
     }
 
     /* localstorage controller */
-
+    
     addStorageItems(list){
         if(!Array.isArray(list)){
             return false;
@@ -129,18 +137,16 @@ class Store {
         const keys = this.storageItems;
         console.log();
         keys.forEach(key=>{
-            if(this.storageItems.includes(key)){
-                const value = localStorage.getItem(`saza-state:${key}`);
-                if(value){
-                    const data = {};
-                    try{
-                        const parsedValue = JSON.parse(value);
-                        data[key] = parsedValue;
-                        this.setState(data);
-                    }catch(err){
-                        data[key] = value;
-                        this.setState(data);
-                    }
+            const value = localStorage.getItem(`saza-state:${key}`);
+            if(value){
+                const data = {};
+                try{
+                    const parsedValue = JSON.parse(value);
+                    data[key] = parsedValue;
+                    this.setState(data);
+                }catch(err){
+                    data[key] = value;
+                    this.setState(data);
                 }
             }
         })

@@ -1,7 +1,10 @@
 const prod = process.env.NODE_ENV === "production";
+const path = require('path');
+
  
  const HtmlWebpackPlugin = require("html-webpack-plugin");
  const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+ const CopyWebpackPlugin = require('copy-webpack-plugin');
  
  module.exports = {
     mode: prod ? "production" : "development",
@@ -34,8 +37,9 @@ const prod = process.env.NODE_ENV === "production";
          ],
        },
        {
-          test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, "css-loader"],
+         test: /\.css$/i,
+         use: [MiniCssExtractPlugin.loader,"css-loader" ],
+         
        },
        {
          test: /\.(js|jsx)$/,
@@ -53,13 +57,33 @@ const prod = process.env.NODE_ENV === "production";
     ]
     },
     devtool: prod ? undefined : "source-map",
+    resolve:{
+
+    },
     plugins: [
-       new HtmlWebpackPlugin({
+      new HtmlWebpackPlugin({
           template: "./react/index.html", //index.html path
-       }),
-       new MiniCssExtractPlugin(),
+      }),
+      new MiniCssExtractPlugin(),
+      new CopyWebpackPlugin({
+         patterns:[
+            {
+               from:'./data',
+            }
+         ]
+      }),
     ],
     devServer: {
-      open: true
+      open: true,
+      historyApiFallback: true,
+      setupMiddlewares: (middlewares, devServer) => {
+         // Smth very important
+         return middlewares
+      },
+      hot: "only",
+      static: {
+        directory: path.join(__dirname, './'),
+        serveIndex: true,
+      },
     }
  }; 
