@@ -381,3 +381,55 @@ function MyComponent(){
 
 }
 ```
+
+## nextjs 13 ssr props
+
+for sending props from page.js to components use ```saza-state/props``` :
+
+```javascript
+
+addSazaProps(props:object);
+
+```
+
+In ```page.js``` add props to ```saza-props``` :
+
+```javascript 
+
+import { addSazaProps } from 'saza-state/props';
+import MyComponent from './components/Component1';
+
+addSazaProps({
+  title:"my title",
+})
+
+export default function Home() {
+  return (
+    <MyComponent />
+  )
+}
+
+```
+
+and in component you can get this props with ```getSazaProps``` :
+
+```javascript
+getSazaProps(selector?:Function):any
+```
+
+in ```MyComponent.js``` :
+
+```javascript
+
+import { getSazaProps } from "saza-state/props";
+
+export default function MyComponent(){
+    
+    const title = getSazaProps(props=>props.title); // result is my title
+
+    return (<div className="my-compo">
+        <h1>{title}</h1>
+    </div>);
+}
+
+```

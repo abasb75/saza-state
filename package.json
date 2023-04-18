@@ -1,12 +1,12 @@
 {
   "name": "saza-states",
-  "version": "0.0.2",
+  "version": "0.2.0",
   "description": "a great state manager for react",
   "scripts": {
     "start": "webpack serve --port 3000",
     "build": "set NODE_ENV=production && webpack",
     "clean": "rm -rf dist",
-    "release": "mkdirp ./dist && copy assets\\package.json dist\\ && copy src\\ dist\\ && copy README.md dist\\"
+    "release": "node ./scripts/release"
   },
   "keywords": [],
   "author": "Abbas Bagheri <abasbagheria@gmail.com>",
@@ -42,9 +42,12 @@
     "webpack-dev-server": "^4.13.2"
   },
   "dependencies": {
+    "fs-extra": "^11.1.1",
+    "inquirer": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "6.8",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-syntax-highlighter": "^15.5.0",
+    "tsup": "^6.7.0"
   }
 }
