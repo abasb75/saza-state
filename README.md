@@ -3,6 +3,7 @@
 <p>It save state on browser storage like <code>redux-persist</code> </p>
 <p>It does not require external tools to apply changes in different tabs of the browser</p>
 <p>It has optimized rendering.</p>
+<p>It support ssr rendering in <code>next-js13</code></p>
 <p>
 <img src="assets/multi-tab-screen.gif" alt="saza-state" />
 </p>
@@ -382,7 +383,7 @@ function MyComponent(){
 }
 ```
 
-## nextjs 13 ssr props
+## nextjs 13 with ssr props
 
 for sending props from page.js to components use ```saza-state/props``` :
 
