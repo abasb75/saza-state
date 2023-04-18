@@ -1,5 +1,5 @@
 class PropsStore {
-    props = [];
+    props = {};
 
     addProps(props){
         this.props = {
@@ -19,7 +19,7 @@ class PropsStore {
 
 const props = new PropsStore();
 
-const addSazaProps = props.addProps;
-const getSazaProps = props.getProps;
+const addSazaProps = props.addProps.bind(props);
+const getSazaProps = props.getProps.bind(props);
 
 export {addSazaProps , getSazaProps };
