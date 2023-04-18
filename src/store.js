@@ -14,7 +14,7 @@ class Store {
 
         this.loadFromStorage();
 
-        if(window && window.addEventListener){
+        if(typeof window !== "undefined" && window.addEventListener){
             window.addEventListener('storage',()=>{
                 this.loadFromStorage();
             })
@@ -135,7 +135,6 @@ class Store {
 
     loadFromStorage(){
         const keys = this.storageItems;
-        console.log();
         keys.forEach(key=>{
             const value = localStorage.getItem(`saza-state:${key}`);
             if(value){
