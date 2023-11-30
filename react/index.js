@@ -2,15 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { setupSazaStorageItems } from '../src';
+import {Provider} from '../src';
+import store from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    <Provider store={store}>
+        <App />
+    </Provider>
+    
 );
-
-
-// setup counter storage
-setupSazaStorageItems(
-    ['storageCounter'], // storageCounter will save on browser storage
-)

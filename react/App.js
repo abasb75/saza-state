@@ -1,42 +1,116 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import SideBar from './components/sidebar';
-import Installation from './routes/installation';
-import Usage from './routes/usage';
-import UseSazaState from './routes/useSazaState';
-import Dispatch from './routes/dispatch';
-import AddSazaAction from './routes/addSazaAction';
-import ClassComponent from './routes/classComponents';
-import AddSazaStateWatcher from './routes/addSazaStateWatcher';
-import AddSazaStateWatcherOptimized from './routes/optimizationAddSazaStateWatcher';
-import SazaAsyncDispatch from './routes/sazaAsyncDispatch';
-import LocalStorage from './routes/localstorage';
-import SazaFetchData from './routes/sazaFetchData';
+import { useGetter, useSelector, useDispatch, useAction, useSaza } from '../src';
 
 function App() {
 
-  return (<BrowserRouter>
-    <SideBar />
-    <div className='main'>
-        <Routes>
-            <Route index path='/' element={<Installation />} />
-            <Route index path='/installation' element={<Installation />} />
-            <Route exact path='/usage' element={<Usage />} />
-            <Route exact path='/use-saza-state' element={<UseSazaState />} />
-            <Route exact path='/saza-dispatch' element={<Dispatch />} />
-            <Route exact path='/add-saza-action' element={<AddSazaAction />} />
-            <Route exact path='/class-component' element={<ClassComponent />} />
-            <Route exact path='/add-saza-state-whatcher' element={<AddSazaStateWatcher />} />
-            <Route exact path='/add-saza-state-whatcher-optimization' element={<AddSazaStateWatcherOptimized  />} />
-            <Route exact path='/saza-async-dispatch' element={<SazaAsyncDispatch  />} />
-            <Route exact path='/localStorage' element={<LocalStorage  />} />
-            <Route exact path='/saza-fetch-data' element={<SazaFetchData  />} />
-        </Routes>
-    </div>
-  </BrowserRouter>);
+  return (<>
+  
+    <Counter />
+    <Counter2 />
+    <Counter3 />
 
+    <Vertus />
+    <Vertus2 />
+    <Vertus3 />
+    <Vertus4 />
+
+  </>);
+}
+
+function Counter(){
+  const counter = useSelector();
+  const dispatch = useDispatch();
+
+  return (<div>
+    <button onClick={()=>dispatch('counter.decrement')}>-</button>
+    <span>counter : {counter.counter}</span>
+    <button onClick={()=>dispatch({type:'counter.increment'})}>+</button>
+  </div>);
 
 }
+
+function Counter2(){
+  const counter = useSelector(state=>state.counter);
+  const dispatch = useDispatch(action=>action.counter);
+
+  return (<div>
+    <button onClick={()=>dispatch('decrement')}>-</button>
+    <span>counter : {counter}</span>
+    <button onClick={()=>dispatch({type:'increment'})}>+</button>
+  </div>);
+
+}
+
+
+function Counter3(){
+  const [counter,setCounter] = useSaza(state=>state.counter);
+
+  return (<div>
+    <button onClick={()=>setCounter(counter=>counter-1)}>-</button>
+    <span>counter : {counter}</span>
+    <button onClick={()=>setCounter(counter+1)}>+</button>
+  </div>);
+
+}
+
+
+
+function Vertus(){
+  const {value} = useGetter(state=>state.vertus);
+  const {increment,decrement} = useAction(action=>action.vertus);
+
+  return (<div>
+    <button onClick={decrement}>-</button>
+    <span>vertus : {value}</span>
+    <button onClick={increment}>+</button>
+  </div>);
+
+}
+
+function Vertus2(){
+  const [state,setState] = useSaza();
+
+  return (<div>
+    <button onClick={()=>setState({
+      vertus:{
+        value:state.vertus.value-1
+      },
+    })}>-</button>
+    <span>vertus : {state.vertus.value}</span>
+    <button onClick={()=>setState(state=>({
+      vertus:{
+        value:state.vertus.value+1,
+      }
+    }))}>+</button>
+  </div>);
+}
+
+
+function Vertus3(){
+  const [value,setValue] = useSaza(state=>state.vertus.value);
+
+  return (<div>
+    <button onClick={()=>setValue(value-1)}>-</button>
+    <span>vertus : {value}</span>
+    <button onClick={()=>setValue(value=>value+1)}>+</button>
+  </div>);
+
+}
+
+function Vertus4(){
+  const {value} = useGetter('vertus');
+  const {increment,decrement} = useAction(action=>action.vertus);
+
+  return (<div>
+    <button onClick={decrement}>-</button>
+    <span>vertus : {value}</span>
+    <button onClick={increment}>+</button>
+  </div>);
+
+}
+
+
+
+
 
 export default App;
