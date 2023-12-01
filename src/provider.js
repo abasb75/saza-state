@@ -6,8 +6,10 @@ const SazaContext = createContext(null);
 
 function Provider({children,store=undefined}){
     useLayoutEffect(()=>{
-        storageListner(store);
-    },[]);
+        if(store){
+            storageListner(store);
+        }
+    },[store]);
     if(!store){
         return (
             <p>Saza provider need to store :(</p>
