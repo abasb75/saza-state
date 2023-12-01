@@ -4,10 +4,15 @@ import storageListner from "./internalMethods/storageListner";
 
 const SazaContext = createContext(null);
 
-function Provider({children,store}){
+function Provider({children,store=undefined}){
     useLayoutEffect(()=>{
         storageListner(store);
     },[]);
+    if(!store){
+        return (
+            <p>Saza provider need to store :(</p>
+        );
+    }
     return (
         <SazaContext.Provider value={store}>
             {children}

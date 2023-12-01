@@ -1,7 +1,7 @@
 {
   "name": "saza-states",
-  "version": "1.0.0-beta",
-  "description": "a great state manager for react",
+  "version": "1.0.2",
+  "description": "a great state manager for react 18+",
   "scripts": {
     "start": "webpack serve --port 3000",
     "build": "set NODE_ENV=production && webpack",
