@@ -4,15 +4,9 @@ import { useGetter, useSelector, useDispatch, useAction, useSaza } from '../src'
 function App() {
 
   return (<>
-  
     <Counter />
-    <Counter2 />
-    <Counter3 />
-
-    <Vertus />
-    <Vertus2 />
+    
     <Vertus3 />
-    <Vertus4 />
 
   </>);
 }

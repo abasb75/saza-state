@@ -1,6 +1,6 @@
 import createStore from "./createStore";
 
-import Provider from "./provider.jsx";
+import SazaProvider from "./provider";
 
 import useSelector from "./hooks/useSelector";
 import useDispatch from "./hooks/useDispatch";
@@ -13,7 +13,7 @@ import useAction from "./hooks/useAction";
 
 export {
     createStore,
-    Provider,
+    SazaProvider,
 
     useDispatch,
     useSelector,

@@ -1,19 +1,21 @@
 import getInitialState from "./internalMethods/getInitialState";
-import reformInitialState from "./internalMethods/reformatInitialState";
+import reformConfig from "./internalMethods/reformConfig";
 import getActions from "./internalMethods/getActions";
-import clone from "./internalMethods/clone";
+import saveOnStorage from "./internalMethods/saveOnStorage";
 
 
-const createStore = (initialState={})=>{
+const createStore = (storeConfig={})=>{
+
+
+    const storageKey = 'SAZA-STATE-94SNDSJKLSAKMASOOIMLKAL-';
     
-    const reformedInitialState = reformInitialState(initialState);
-    let state = getInitialState(reformedInitialState);
+    const reformedStoreConfig = reformConfig(storeConfig);
+    let state = getInitialState(reformedStoreConfig,storageKey);
     
     const subscribers = [];
     let subscribersLastId = 0;
 
     const setState = (newState) => {
-        console.log(state,newState)
         if(typeof newState === 'object'){
             state = {
                 ...state,
@@ -27,10 +29,10 @@ const createStore = (initialState={})=>{
         }else{
             return;
         }
-        console.log(state);
+
+        saveOnStorage(state,storageKey,reformedStoreConfig);
         
         subscribers.forEach(subscriber=>{
-            console.log(subscriber.method);
             subscriber.method(state)
         });
     }
@@ -59,8 +61,7 @@ const createStore = (initialState={})=>{
         list.splice(index, 1);
     }
 
-    const actions = getActions(reformedInitialState,getState,setState);
-    console.log('actions',actions);
+    const actions = getActions(reformedStoreConfig,getState,setState);
 
     const getAction = (selector=null)=> {
         if(typeof selector === 'function'){
@@ -75,6 +76,7 @@ const createStore = (initialState={})=>{
         subscribe,
         unsubscribe,
         getAction,
+        storageKey,
     }
 
 }

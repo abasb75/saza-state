@@ -1,8 +1,8 @@
-function reformInitialState(initialState){
-    return Object.keys(initialState).map(key=>{
+function reformConfig(config){
+    return Object.keys(config).map(key=>{
         return {
-            label:initialState[key]?.label?(initialState[key].label):key,
-            storagble:(initialState[key]?.storagble===true)?(initialState[key].storagble):false,
+            label:config[key]?.label?(config[key].label):key,
+            storagble:(config[key]?.storagble===true)?(config[key].storagble):false,
             actions:{
                 default:(state)=>{
                     return state;
@@ -16,12 +16,12 @@ function reformInitialState(initialState){
                     }
                     return value;
                 },
-                ...(initialState[key]?.actions || {})
+                ...(config[key]?.actions || {})
             },
-            initialValue:(initialState[key]?.initialValue!==undefined)?(initialState[key]?.initialValue):{},
+            initialValue:(config[key]?.initialValue!==undefined)?(config[key]?.initialValue):{},
         }
     }).reduce((obj, item) => Object.assign(obj, { [item.label]: item }), {});
       
 }
 
-export default reformInitialState;
+export default reformConfig;

@@ -16,6 +16,9 @@
       "includeNodeModules": true
     }
   },
+  "peerDependencies": {
+    "react":"^18.2.0"
+  },
   "author": "Abbas Bagheri <abasbagheria@gmail.com>",
   "license": "ISC",
   "repository": {

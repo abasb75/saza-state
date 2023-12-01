@@ -1,10 +1,10 @@
 import getUsableActions from "./getUsableActions";
 
-function getActions(initialState,getState,setState){
-    return Object.keys(initialState).map(key=>{
+function getActions(config,getState,setState){
+    return Object.keys(config).map(key=>{
         return {
             key:key,
-            value:getUsableActions(initialState[key],getState,setState),
+            value:getUsableActions(config[key],getState,setState),
         }
     }).reduce((obj, item) => Object.assign(obj, { [item.key]: item.value }), {});
 }

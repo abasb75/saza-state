@@ -1,12 +1,11 @@
-function getUsableActions(initialState,getState,setState){
-    console.log(initialState);
-    return Object.keys(initialState?.actions).map(key=>{
+function getUsableActions(config,getState,setState){
+    return Object.keys(config?.actions).map(key=>{
         return {
             key:key,
             value:(newValue=undefined)=>{
-                const label = initialState.label;
+                const label = config.label;
                 const state = getState();
-                const rerurnedState = initialState.actions[key](state[label],newValue);
+                const rerurnedState = config.actions[key](state[label],newValue);
                 setState({
                     [label]:rerurnedState,
                 });

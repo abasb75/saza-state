@@ -1,6 +1,7 @@
 import { useContext, useDebugValue, useSyncExternalStore } from "react";
 import { SazaContext } from "../provider";
 import clone from "../internalMethods/clone";
+import getSelectorByFunction from "../internalMethods/getSelectorByFunction";
 
 const useSaza = (selector=undefined) => {
     const store = useContext(SazaContext);
@@ -17,9 +18,7 @@ const useSaza = (selector=undefined) => {
     
     useDebugValue(state);
     try{
-        let selectorToString = selector?.toString().split('return ');
-        selectorToString = selectorToString[1].split(';')[0];
-        
+        let selectorToString = getSelectorByFunction(selector);
         const keys = selectorToString.split('.');
         if(keys.length === 2){
             const {set} = store.getAction(action=>action[keys[1]]);
@@ -36,7 +35,6 @@ const useSaza = (selector=undefined) => {
                     const result = newValue(state)
                     const newState = clone({...store.getState()});
                     newState[keys[1]][keys[2]] = result;
-                    console.log(store.getState());
                     return store.setState({...newState});
                 }
                 const newState = clone({...store.getState()});

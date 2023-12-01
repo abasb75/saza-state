@@ -8,7 +8,6 @@ const useSelector = (selector=undefined) => {
         ()=>store.getState(selector),
     );
     useDebugValue(state);
-    console.log(state);
     return state;
 }
 
