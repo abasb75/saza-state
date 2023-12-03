@@ -50,7 +50,7 @@ const createStore = (storeConfig={})=>{
             id:subscriberId,
             method:subscriber,
         });
-        return ()=>unsubscribe(id);
+        return ()=>unsubscribe(subscriberId);
     }
 
     const unsubscribe = (subscriberId)=> {
