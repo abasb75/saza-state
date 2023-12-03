@@ -9,7 +9,7 @@ function getInitialState(config,storageKey){
             }
         }
         const storageValue = getFromStorage(`${storageKey}${key}`);
-        if(typeof storageValue === 'object' && storageValue.hasOwnProperty('value')){
+        if(typeof storageValue === 'object' && storageValue?.hasOwnProperty('value')){
             return {
                 key,
                 value:storageValue?.value,
