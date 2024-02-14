@@ -1,5 +1,6 @@
 import './App.css';
 import { useGetter, useSelector, useDispatch, useAction, useSaza } from '../src';
+import { useState } from 'react';
 
 function App() {
 
@@ -8,8 +9,36 @@ function App() {
     
     <Vertus3 />
 
+    <Notes />
   </>);
 }
+
+function Notes(){
+  const notes = useSelector(state=>state.note);
+  const [value,setValue] = useState('');
+  
+  const addNote = ()=>{
+    notes.add({
+      id:notes.lastId()+1,
+      title:value,
+    });
+  }
+
+  return (<>
+    <div>
+      <input type="text" value={value} onChange={e=>setValue(e.target.value)} />
+      <button onClick={addNote}>add</button>
+    </div>
+    <ul>
+      {notes.map(note=>(<li>
+        <span>{note.title}</span>
+        <button>delete</button>
+        <button>edit</button>
+      </li>))}
+    </ul>
+  </>)
+}
+
 
 function Counter(){
   const counter = useSelector();

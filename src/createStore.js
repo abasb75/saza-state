@@ -33,7 +33,7 @@ const createStore = (storeConfig={})=>{
         saveOnStorage(state,storageKey,reformedStoreConfig);
         
         subscribers.forEach(subscriber=>{
-            subscriber.method(state)
+            subscriber.method(state);
         });
     }
 

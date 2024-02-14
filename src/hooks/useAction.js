@@ -3,6 +3,7 @@ import { SazaContext } from "../provider";
 
 const useAction = (selector=null) => {
     const store = useContext(SazaContext);
+    if(!store) return undefined;
     const action = useSyncExternalStore(
         store.subscribe,
         ()=>{

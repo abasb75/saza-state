@@ -5,6 +5,7 @@ import getSelectorByFunction from "../internalMethods/getSelectorByFunction";
 
 const useSaza = (selector=undefined) => {
     const store = useContext(SazaContext);
+    if(!store) return undefined;
     const state = useSyncExternalStore(
         store.subscribe,
         ()=>{
@@ -16,7 +17,6 @@ const useSaza = (selector=undefined) => {
         },
     );
     
-    useDebugValue(state);
     try{
         let selectorToString = getSelectorByFunction(selector);
         const keys = selectorToString.split('.');
